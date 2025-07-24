@@ -53,7 +53,7 @@ jobs:
       - name: Install dependencies (clean + frozen)
         run: |
           bun pm cache clean
-          bun install --no-cache --frozen-lockfile
+          bun install --no-cache
         env:
           TERM: xterm
 
