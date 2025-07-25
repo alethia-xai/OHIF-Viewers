@@ -7,6 +7,7 @@ import Dropzone from 'react-dropzone';
 import filesToStudies from './filesToStudies';
 
 import { extensionManager } from '../../App';
+import { useAppConfig } from '@state';
 
 import { Button, Icons } from '@ohif/ui-next';
 
@@ -52,6 +53,7 @@ type LocalProps = {
 function Local({ modePath }: LocalProps) {
   const { servicesManager } = useSystem();
   const { customizationService } = servicesManager.services;
+  const [appConfig] = useAppConfig();
   const navigate = useNavigate();
   const dropzoneRef = useRef();
   const [dropInitiated, setDropInitiated] = React.useState(false);
@@ -134,7 +136,7 @@ function Local({ modePath }: LocalProps) {
           <div className="flex h-screen w-screen items-center justify-center">
             <div className="bg-muted border-primary/60 mx-auto space-y-2 rounded-xl border border-dashed py-12 px-12 drop-shadow-md">
               <div className="flex items-center justify-center">
-                <Icons.OHIFLogoColorDarkBackground className="h-18" />
+                {appConfig?.whiteLabeling?.createLogoComponentFn?.(React, { className: 'h-18' }) || <Icons.OHIFLogoColorDarkBackground className="h-18" />}
               </div>
               <div className="space-y-2 py-6 text-center">
                 {dropInitiated ? (
