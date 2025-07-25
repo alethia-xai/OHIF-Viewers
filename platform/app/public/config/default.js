@@ -3,7 +3,15 @@
 window.config = {
   name: 'config/default.js',
   routerBasename: null,
-  // whiteLabeling: {},
+  whiteLabeling: {
+    createLogoComponentFn: function (React) {
+      return React.createElement('img', {
+        src: 'https://obz.ai/logo/obzai-logo-dark.png',
+        className: 'h-8 px-2 py-1',
+        alt: 'OBZ.ai Logo'
+      });
+    },
+  },
   extensions: [],
   modes: [],
   customizationService: {},
