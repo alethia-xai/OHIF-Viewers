@@ -58,6 +58,13 @@ if [ -n "$CLIENT_ID" ] || [ -n "$HEALTHCARE_API_ENDPOINT" ]
 	  cp /usr/share/nginx/html/google.js /usr/share/nginx/html/app-config.js
 fi
 
+# Cache busting: Add version to static files
+if [ -n "$CACHE_VERSION" ]; then
+  echo "Adding cache version $CACHE_VERSION to static assets..."
+  find /usr/share/nginx/html -name "*.html" -exec sed -i "s|src=\"/assets/|src=\"/assets/?v=$CACHE_VERSION|g" {} +
+  find /usr/share/nginx/html -name "*.html" -exec sed -i "s|href=\"/assets/|href=\"/assets/?v=$CACHE_VERSION|g" {} +
+fi
+
 echo "Starting Nginx to serve the OHIF Viewer on ${PUBLIC_URL}"
 
 exec "$@"
